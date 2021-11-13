@@ -29,7 +29,7 @@ public:
             timer.start();
             sort( data.begin(), data.end() );
             timer.stop();
-            totalTime += timer.getElapsedTimeInMs() * 1000;
+            totalTime += timer.getElapsedTimeInSec() * 1000;
         }
 
         return testsCount == 0 ? 0 : totalTime / (double ) testsCount;

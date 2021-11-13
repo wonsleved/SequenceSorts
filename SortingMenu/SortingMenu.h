@@ -23,6 +23,7 @@ Menu testSortAlgorithmMenu();
 
 typedef void (*sort_function)(Container<int>::iterator, Container<int>::iterator);
 void test(sort_function sort);
+Menu compareSortsMenu(int size, int amount);
 
 int getInteger(int min, int max);
 int getInteger(int min);

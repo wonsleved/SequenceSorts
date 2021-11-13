@@ -16,7 +16,7 @@ double Timer::getElapsedTime() {
     return difftime(_end, _start);
 }
 
-double Timer::getElapsedTimeInMs() {
+double Timer::getElapsedTimeInSec() {
     return getElapsedTime() / CLOCKS_PER_SEC;
 }
 

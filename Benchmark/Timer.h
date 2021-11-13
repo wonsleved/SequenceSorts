@@ -22,7 +22,7 @@ public:
     void    start() override;
     double  stop()  override;
     double getElapsedTime() override;
-    double getElapsedTimeInMs();
+    double getElapsedTimeInSec();
 
     Timer& operator = (const Timer&) = delete;
 };

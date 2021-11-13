@@ -81,8 +81,19 @@ Menu getMainMenu(ContContainer& arrContainer) {
         algTestMenu.chooseSingleOption();
         std::cout << std::endl;
     });
+    menu.addOption("Compare algorithms", []() {
+        std::cout << std::endl;
+        std::cout << "\tEnter size of each container: ";
+        int size = getInteger(0);
+        std::cout << "\tEnter amount of tests: ";
+        int amount = getInteger(0);
 
-
+        std::cout << std::endl;
+        Menu compSortsMenu = compareSortsMenu(size, amount);
+        compSortsMenu.displayMenu();
+        compSortsMenu.chooseOption(false);
+        std::cout << std::endl;
+    });
 
 
 
@@ -310,4 +321,64 @@ Type getValue() {
     } while (isBad);
     std::cin.ignore(32767,'\n');
     return value;
+}
+
+
+Menu compareSortsMenu(int size, int amount) {
+    Menu compareSortsMenu;
+
+    compareSortsMenu.addOption("BubbleSort", [size, amount](){
+        double ms = Benchmark<Container>::benchmark(BubbleSort, size, amount);
+        std::cout << "\tBubbleSort: " << ms << " ms" << std::endl;
+    });
+    compareSortsMenu.addOption("ShakerSort", [size, amount](){
+        double ms = Benchmark<Container>::benchmark(ShakerSort, size, amount);
+        std::cout << "\tShakerSort: " << ms << " ms" << std::endl;
+    });
+    compareSortsMenu.addOption("InsertionSort", [size, amount](){
+        double ms = Benchmark<Container>::benchmark(InsertionSort, size, amount);
+        std::cout << "\tInsertionSort: " << ms << " ms" << std::endl;
+    });
+    compareSortsMenu.addOption("SelectionSort", [size, amount](){
+        double ms = Benchmark<Container>::benchmark(SelectionSort, size, amount);
+        std::cout << "\tSelectionSort: " << ms << " ms" << std::endl;
+    });
+    compareSortsMenu.addOption("BinaryInsertionSort", [size, amount](){
+        double ms = Benchmark<Container>::benchmark(BinaryInsertionSort, size, amount);
+        std::cout << "\tBinaryInsertionSort: " << ms << " ms" << std::endl;
+    });
+    compareSortsMenu.addOption("MergeSort", [size, amount](){
+        double ms = Benchmark<Container>::benchmark(MergeSort, size, amount);
+        std::cout << "\tMergeSort: " << ms << " ms" << std::endl;
+    });
+    compareSortsMenu.addOption("QuickSort", [size, amount](){
+        double ms = Benchmark<Container>::benchmark(QuickSort, size, amount);
+        std::cout << "\tQuickSort: " << ms << " ms" << std::endl;
+    });
+    compareSortsMenu.addOption("Test All", [size, amount](){
+        double ms;
+
+        ms = Benchmark<Container>::benchmark(BubbleSort, size, amount);
+        std::cout << "\tBubbleSort:\t\t\t\t" << ms << " ms" << std::endl;
+
+        ms = Benchmark<Container>::benchmark(ShakerSort, size, amount);
+        std::cout << "\tShakerSort:\t\t\t\t" << ms << " ms" << std::endl;
+
+        ms = Benchmark<Container>::benchmark(InsertionSort, size, amount);
+        std::cout << "\tInsertionSort:\t\t\t" << ms << " ms" << std::endl;
+
+        ms = Benchmark<Container>::benchmark(SelectionSort, size, amount);
+        std::cout << "\tSelectionSort:\t\t\t" << ms << " ms" << std::endl;
+
+        ms = Benchmark<Container>::benchmark(BinaryInsertionSort, size, amount);
+        std::cout << "\tBinaryInsertionSort:\t" << ms << " ms" << std::endl;
+
+        ms = Benchmark<Container>::benchmark(MergeSort, size, amount);
+        std::cout << "\tMergeSort:\t\t\t\t" << ms << " ms" << std::endl;
+
+        ms = Benchmark<Container>::benchmark(QuickSort, size, amount);
+        std::cout << "\tQuickSort:\t\t\t\t" << ms << " ms" << std::endl;
+
+    });
+    return compareSortsMenu;
 }
