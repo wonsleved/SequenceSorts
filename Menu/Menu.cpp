@@ -34,6 +34,11 @@ void Menu::addOption(std::string  description,
     options.emplace_back(description, action);
 }
 
+void Menu::chooseSingleOption() const {
+    displayMenu();
+    chooseOneOption();
+}
+
 void Menu::chooseOption() const {
     chooseOption(true);
 }
@@ -89,11 +94,11 @@ int getOptionFromInput(int min, int max) {
 //    return menu;
 //}
 
-IMenu& Menu::createContextMenu(const std::string& description) {
+Menu& Menu::createContextMenu(const std::string& description) {
     return createContextMenu(description, false);
 }
 
-IMenu& Menu::createContextMenu(const std::string& description, bool doDisplayMenu) {
+Menu& Menu::createContextMenu(const std::string& description, bool doDisplayMenu) {
     Menu* contextMenu = new Menu(this);
 
     std::cout << description << " " << contextMenu << std::endl;

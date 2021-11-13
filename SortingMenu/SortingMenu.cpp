@@ -11,41 +11,209 @@ void sortingMenu() {
 Menu getMainMenu(ContContainer& arrContainer) {
     Menu menu;
     menu.addOption("Add new data",[&arrContainer]() {
+        std::cout << std::endl;
         Container<Type> container;
         int size;
-        std::cout << "Enter size: ";
+        std::cout << "\tEnter size: ";
         size = getInteger(0);
         Type value;
         for (int i = 0; i < size; ++i) {
-            std::cout << i + 1 << ": ";
+            std::cout << "\t" << i + 1 << ": ";
             value = getValue();
             container.append(value);
-//            std::cout << std::endl;
         }
         arrContainer.append(container);
-        std::cout << "OK!" << std::endl;
+        std::cout << "\tADDED" << std::endl;
+        std::cout << std::endl;
+    });
+    menu.addOption("Remove data", [&arrContainer]() {
+        std::cout << std::endl;
+        if (arrContainer.getSize() == 0) {
+            std::cout << "\tThere is no data" << std::endl;
+        } else {
+            std::cout << "\tEnter ID(-1 to exit): ";
+            int index = getInteger(-1, arrContainer.getSize() - 1);
+            if (index != -1) {
+                arrContainer.remove(index);
+                std::cout << "\tREMOVED" << std::endl;
+            }
+        }
+        std::cout << std::endl;
     });
     menu.addOption("Show all data", [&arrContainer]() {
+        std::cout << std::endl;
+        if (arrContainer.getSize() == 0)
+            std::cout << "\tThere is no data" << std::endl;
+
         ContContainer::iterator mainIt = arrContainer.begin();
         while(mainIt != arrContainer.end()) {
             Container<Type>::iterator it = (*mainIt).begin();
             Container<Type>::iterator endIt = (*mainIt).end();
 
-            std::cout << "[ ";
+            std::cout << "\tID " << mainIt - arrContainer.begin() << ": [ ";
             while (it != endIt) {
-                std::cout << *it << " ";
+                std::cout << *it << ((it + 1 == endIt) ? " " : ", ");
                 ++it;
             }
             std::cout << "]" << std::endl;
             ++mainIt;
         }
+        std::cout << std::endl;
     });
+    menu.addOption("Sort data", [&arrContainer]() {
+        std::cout << std::endl;
+        if (arrContainer.getSize() == 0)
+            std::cout << "\tThere is no data" << std::endl;
+        else {
+            std::cout << "\tEnter ID(-1 to exit): ";
+            int index = getInteger(-1, arrContainer.getSize() - 1);
+            if (index != -1) {
+                Menu replMenu = replaceWithSortedDataMenu( *(arrContainer.begin() + index));
+                replMenu.chooseSingleOption();
+            }
+        }
+        std::cout << std::endl;
+    });
+    menu.addOption("Test algorithm with random data", []() {
+        std::cout << std::endl;
+        std::cout << "Choose algorithm to test" << std::endl;
+        Menu algTestMenu = testSortAlgorithmMenu();
+        algTestMenu.chooseSingleOption();
+        std::cout << std::endl;
+    });
+
+
+
+
+
     return menu;
 }
 
+Menu chooseSortAlgorithmMenu(Container<Type>& container) {
+    Menu chooseSortAlgorithm;
+    chooseSortAlgorithm.addOption("BubbleSort", [&container](){
+        BubbleSort(container.begin(), container.end());
+    });
+    chooseSortAlgorithm.addOption("ShakerSort", [&container](){
+        ShakerSort(container.begin(), container.end());
+    });
+    chooseSortAlgorithm.addOption("InsertionSort", [&container](){
+        InsertionSort(container.begin(), container.end());
+    });
+    chooseSortAlgorithm.addOption("SelectionSort", [&container](){
+        SelectionSort(container.begin(), container.end());
+    });
+    chooseSortAlgorithm.addOption("BinaryInsertionSort", [&container](){
+        BinaryInsertionSort(container.begin(), container.end());
+    });
+    chooseSortAlgorithm.addOption("MergeSort", [&container](){
+        MergeSort(container.begin(), container.end());
+    });
+    chooseSortAlgorithm.addOption("QuickSort", [&container](){
+        QuickSort(container.begin(), container.end());
+    });
+    return chooseSortAlgorithm;
+}
+
+Menu replaceWithSortedDataMenu(Container<Type>& container) {
+    Menu replaceDataMenu;
+
+    replaceDataMenu.addOption("Replace data", [&container](){
+        Menu chooseSortingAlgorithm = chooseSortAlgorithmMenu(container);
+        chooseSortingAlgorithm.chooseSingleOption();
+        std::cout << std::endl;
+        std::cout <<  "\t[ ";
+        Container<Type>::iterator it = container.begin();
+        Container<Type>::iterator endIt = container.end();
+        while (it != endIt) {
+            std::cout << *it << ((it + 1 == endIt) ? " " : ", ");
+            ++it;
+        }
+        std::cout << "]" << std::endl;
+    });
+    replaceDataMenu.addOption("DON`T replace data", [&container](){
+        Container<Type> containerCopy = container;
+        Menu chooseSortingAlgorithm = chooseSortAlgorithmMenu(containerCopy);
+        chooseSortingAlgorithm.chooseSingleOption();
+        std::cout << std::endl;
+        std::cout <<  "\t[ ";
+        Container<Type>::iterator it = containerCopy.begin();
+        Container<Type>::iterator endIt = containerCopy.end();
+        while (it != endIt) {
+            std::cout << *it << ((it + 1 == endIt) ? " " : ", ");
+            ++it;
+        }
+        std::cout << "]" << std::endl;
+    });
+    return replaceDataMenu;
+}
+
+Menu testSortAlgorithmMenu() {
+    Menu chooseSortAlgorithm;
+    chooseSortAlgorithm.addOption("BubbleSort", [](){
+        test(BubbleSort);
+    });
+    chooseSortAlgorithm.addOption("ShakerSort", [](){
+        test(ShakerSort);
+    });
+    chooseSortAlgorithm.addOption("InsertionSort", [](){
+        test(InsertionSort);
+    });
+    chooseSortAlgorithm.addOption("SelectionSort", [](){
+        test(SelectionSort);
+    });
+    chooseSortAlgorithm.addOption("BinaryInsertionSort", [](){
+        test(BinaryInsertionSort);
+    });
+    chooseSortAlgorithm.addOption("MergeSort", [](){
+        test(MergeSort);
+    });
+    chooseSortAlgorithm.addOption("QuickSort", [](){
+        test(QuickSort);
+    });
+    chooseSortAlgorithm.addOption("Test All", [](){
+        std::cout << "\tEnter size of each container: ";
+        int size = getInteger(0);
+        std::cout << "\tEnter amount of tests: ";
+        int amount = getInteger(0);
+
+        std::cout << "BubbleSort" << std::endl;
+        SortTester<Container>::test(BubbleSort, size, amount);
+
+        std::cout << "ShakerSort" << std::endl;
+        SortTester<Container>::test(ShakerSort, size, amount);
 
 
+        std::cout << "InsertionSort" << std::endl;
+        SortTester<Container>::test(InsertionSort, size, amount);
 
+
+        std::cout << "SelectionSort" << std::endl;
+        SortTester<Container>::test(SelectionSort, size, amount);
+
+
+        std::cout << "BinaryInsertionSort" << std::endl;
+        SortTester<Container>::test(BinaryInsertionSort, size, amount);
+
+
+        std::cout << "MergeSort" << std::endl;
+        SortTester<Container>::test(MergeSort, size, amount);
+
+
+        std::cout << "QuickSort" << std::endl;
+        SortTester<Container>::test(QuickSort, size, amount);
+
+    });
+    return chooseSortAlgorithm;
+}
+
+void test(sort_function sort) {
+    std::cout << "\tEnter size of each container: ";
+    int size = getInteger(0);
+    std::cout << "\tEnter amount of tests: ";
+    int amount = getInteger(0);
+    SortTester<Container>::test(sort, size, amount);
+}
 
 
 

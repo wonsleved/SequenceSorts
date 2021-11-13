@@ -8,8 +8,8 @@
 #include "./SortingMenu/SortingMenu.h"
 
 int main() {
-    SortTester<DynamicArraySequence>::test(BubbleSort, 5, 10);
-//    sortingMenu();
+//    SortTester<DynamicArraySequence>::test(BubbleSort, 5, 10);
+    sortingMenu();
 
     return 0;
 }

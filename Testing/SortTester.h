@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <memory>
 #include <iostream>
+#include <chrono>
 
 template <template <typename T, typename AllocatorT = std::allocator<T>> class ContainerT>
 class SortTester
@@ -42,7 +43,7 @@ public:
             areEqual = areItemsEqual(stdItBegin, stdEndIt,
                                      testItBegin, testEndIt);
             if (!areEqual) {
-                std::cout << "ERROR at " << round + 1 << "/" << testsCount << std::endl;
+                std::cout << "\tERROR at " << round + 1 << "/" << testsCount << std::endl;
                 outputFailedTests(  initialData.begin(), initialData.end(),
                                     stdItBegin, stdEndIt,
                                     testItBegin, testEndIt);
@@ -51,7 +52,7 @@ public:
         }
 
         if (areEqual)
-            std::cout << "OK! " << testsCount << "/" << testsCount << std::endl;
+            std::cout << "\tOK! " << testsCount << "/" << testsCount << std::endl;
 
     }
 

@@ -14,10 +14,11 @@ class IMenu {
 public:
     virtual void displayMenu() const = 0;
     virtual void addOption(std::string  description, std::function<void()> action) = 0;
+    virtual void chooseSingleOption() const = 0;
     virtual void chooseOption() const = 0;
     virtual void chooseOption(bool doDisplayMenu) const = 0;
-    virtual IMenu& createContextMenu(const std::string& description) = 0;
-    virtual IMenu& createContextMenu(const std::string& description, bool doDisplayMenu) = 0;
+    virtual Menu& createContextMenu(const std::string& description) = 0;
+    virtual Menu& createContextMenu(const std::string& description, bool doDisplayMenu) = 0;
 };
 
 class Menu : public IMenu {
@@ -44,10 +45,11 @@ public:
     Menu();
     void displayMenu() const final;
     void addOption(std::string  description, std::function<void()> action) final;
+    void chooseSingleOption() const final;
     void chooseOption() const final;
     void chooseOption(bool doDisplayMenu) const final;
-    IMenu& createContextMenu(const std::string& description) final;
-    IMenu& createContextMenu(const std::string& description, bool doDisplayMenu) final;
+    Menu& createContextMenu(const std::string& description) final;
+    Menu& createContextMenu(const std::string& description, bool doDisplayMenu) final;
     ~Menu();
     Menu& operator= (const Menu& menu);
 
