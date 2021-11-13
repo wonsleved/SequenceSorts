@@ -5,7 +5,7 @@ void QuickSort(Iterator begin, Iterator end, Comparator comparator) {
 
 template<typename Iterator>
 void QuickSort(Iterator begin, Iterator end) {
-    _QuickSort(begin, end, __secrecy::Iter_less_iter());
+    _QuickSort(begin, end, __secrecy::iter_less_iter());
 }
 
 template<typename Iterator, typename Comparator>

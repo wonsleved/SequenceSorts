@@ -20,7 +20,8 @@ DynamicArraySequence(const DynamicArraySequence<T, AllocatorT>& another)
 
 template <typename T, typename AllocatorT>
 DynamicArraySequence<T, AllocatorT>::
-DynamicArraySequence(const DynamicArray<T>& array) : m_array( new DynamicArray<T>(array) ) {}
+DynamicArraySequence(const DynamicArray<T>& array)
+        : m_array( new DynamicArray<T>(array) ) {}
 
 template <typename T, typename AllocatorT>
 DynamicArraySequence<T, AllocatorT>&

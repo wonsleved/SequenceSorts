@@ -5,7 +5,7 @@ void BinaryInsertionSort(Iterator begin, Iterator end, Comparator comparator) {
 
 template<typename Iterator>
 void BinaryInsertionSort(Iterator begin, Iterator end) {
-    _BinaryInsertionSort(begin, end, __secrecy::Iter_less_iter());
+    _BinaryInsertionSort(begin, end, __secrecy::iter_less_iter());
 }
 
 template<typename Iterator, typename Comparator>

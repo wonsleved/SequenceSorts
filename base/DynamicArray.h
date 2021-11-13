@@ -28,9 +28,9 @@ public:
         reference   operator * () const { return *m_ptr; };
         pointer     operator -> () { return m_ptr; };
         iterator&   operator ++ () { m_ptr++; return *this; };
-        iterator    operator ++ (T) { iterator tmp = *this; m_ptr++; return tmp; };
+        iterator    operator ++ (int) { iterator tmp = *this; m_ptr++; return tmp; };
         iterator&   operator -- () { m_ptr--; return *this; };
-        iterator    operator -- (T) { iterator tmp = *this; m_ptr--; return tmp; };
+        iterator    operator -- (int) { iterator tmp = *this; m_ptr--; return tmp; };
 
         iterator operator + (size_t offset) { return iterator(m_ptr + offset); };
         iterator operator - (size_t offset) { return iterator(m_ptr - offset); };

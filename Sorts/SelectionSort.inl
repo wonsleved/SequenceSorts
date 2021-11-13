@@ -5,7 +5,7 @@ void SelectionSort(Iterator begin, Iterator end, Comparator comparator) {
 
 template<typename Iterator>
 void SelectionSort(Iterator begin, Iterator end) {
-    _SelectionSort(begin, end, __secrecy::Iter_less_iter());
+    _SelectionSort(begin, end, __secrecy::iter_less_iter());
 }
 
 template<typename Iterator, typename Comparator>

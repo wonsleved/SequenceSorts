@@ -1,8 +1,8 @@
 #ifndef MYLAB2_SORTS_H
 #define MYLAB2_SORTS_H
 
+#include "./Secrecy.h"
 #include "../Sequence/Sequence.h"
-#include "./Secrecy.inl"
 
 //  Bubble sort
 

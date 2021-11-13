@@ -11,16 +11,17 @@ LinkedListSequence(int size)
 template <typename T, typename AllocatorT>
 LinkedListSequence<T, AllocatorT>::
 LinkedListSequence(T* items, int size)
-    : m_list( new LinkedList<T>(items, size) ) {};
+        : m_list( new LinkedList<T>(items, size) ) {};
 
 template <typename T, typename AllocatorT>
 LinkedListSequence<T, AllocatorT>::
 LinkedListSequence(const LinkedListSequence<T, AllocatorT>& another)
-    : m_list( new LinkedList<T>(*another.m_list) ) {};
+        : m_list( new LinkedList<T>(*another.m_list) ) {};
 
 template <typename T, typename AllocatorT>
 LinkedListSequence<T, AllocatorT>::
-LinkedListSequence(const LinkedList<T>& list) : m_list( new LinkedList<T>(list) ) {}
+LinkedListSequence(const LinkedList<T>& list)
+        : m_list( new LinkedList<T>(list) ) {}
 
 template <typename T, typename AllocatorT>
 LinkedListSequence<T, AllocatorT>&

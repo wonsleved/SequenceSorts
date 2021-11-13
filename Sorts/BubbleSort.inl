@@ -5,7 +5,7 @@ void BubbleSort(Iterator begin, Iterator end, Comparator comparator) {
 
 template<typename Iterator>
 void BubbleSort(Iterator begin, Iterator end) {
-    _BubbleSort(begin, end, __secrecy::Iter_less_iter());
+    _BubbleSort(begin, end, __secrecy::iter_less_iter());
 }
 
 template<typename Iterator, typename Comparator>

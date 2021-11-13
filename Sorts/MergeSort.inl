@@ -5,7 +5,7 @@ void MergeSort(Iterator begin, Iterator end, Comparator comparator) {
 
 template<typename Iterator>
 void MergeSort(Iterator begin, Iterator end) {
-    _MergeSort(begin, end, __secrecy::Iter_less_iter());
+    _MergeSort(begin, end, __secrecy::iter_less_iter());
 }
 
 template<typename Iterator, typename Comparator>
